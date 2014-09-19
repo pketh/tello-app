@@ -1,0 +1,467 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D6B6B8B19CBA76C00CD0CB5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B8A19CBA76C00CD0CB5 /* main.swift */; };
+		9D6B6B8D19CBA76C00CD0CB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B8C19CBA76C00CD0CB5 /* ViewController.swift */; };
+		9D6B6B8F19CBA76C00CD0CB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B8E19CBA76C00CD0CB5 /* AppDelegate.swift */; };
+		9D6B6B9219CBA76C00CD0CB5 /* tello.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B9019CBA76C00CD0CB5 /* tello.xcdatamodeld */; };
+		9D6B6B9419CBA76C00CD0CB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D6B6B9319CBA76C00CD0CB5 /* Images.xcassets */; };
+		9D6B6B9719CBA76C00CD0CB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6B6B9519CBA76C00CD0CB5 /* Main.storyboard */; };
+		9D6B6BA319CBA76C00CD0CB5 /* telloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6BA219CBA76C00CD0CB5 /* telloTests.swift */; };
+		9D6B6BB919CBAA3300CD0CB5 /* NSColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6BB819CBAA3300CD0CB5 /* NSColor+hex.swift */; };
+		9DD7248D19CBC89400690AFB /* TrelloHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7248C19CBC89400690AFB /* TrelloHelper.swift */; };
+		9DD7249519CBCAF800690AFB /* TrelloUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249419CBCAF800690AFB /* TrelloUser.swift */; };
+		9DD7249A19CC895600690AFB /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249919CC895600690AFB /* Alamofire.swift */; };
+		9DD7249C19CC8A6800690AFB /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */; };
+		9DD7249E19CC8C1000690AFB /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249D19CC8C1000690AFB /* Async.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9D6B6B9D19CBA76C00CD0CB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D6B6B7D19CBA76C00CD0CB5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D6B6B8419CBA76C00CD0CB5;
+			remoteInfo = tello;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9D6B6B8519CBA76C00CD0CB5 /* tello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tello.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D6B6B8919CBA76C00CD0CB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D6B6B8A19CBA76C00CD0CB5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9D6B6B8C19CBA76C00CD0CB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9D6B6B8E19CBA76C00CD0CB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9D6B6B9119CBA76C00CD0CB5 /* tello.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tello.xcdatamodel; sourceTree = "<group>"; };
+		9D6B6B9319CBA76C00CD0CB5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9D6B6B9619CBA76C00CD0CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9D6B6B9C19CBA76C00CD0CB5 /* telloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D6B6BA119CBA76C00CD0CB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D6B6BA219CBA76C00CD0CB5 /* telloTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = telloTests.swift; sourceTree = "<group>"; };
+		9D6B6BB819CBAA3300CD0CB5 /* NSColor+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+hex.swift"; sourceTree = "<group>"; };
+		9DD7248C19CBC89400690AFB /* TrelloHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloHelper.swift; sourceTree = "<group>"; };
+		9DD7249419CBCAF800690AFB /* TrelloUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloUser.swift; sourceTree = "<group>"; };
+		9DD7249919CC895600690AFB /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		9DD7249D19CC8C1000690AFB /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9D6B6B8219CBA76C00CD0CB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D6B6B9919CBA76C00CD0CB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9D6B6B7C19CBA76C00CD0CB5 = {
+			isa = PBXGroup;
+			children = (
+				9D6B6B8719CBA76C00CD0CB5 /* tello */,
+				9D6B6B9F19CBA76C00CD0CB5 /* telloTests */,
+				9D6B6B8619CBA76C00CD0CB5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9D6B6B8619CBA76C00CD0CB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D6B6B8519CBA76C00CD0CB5 /* tello.app */,
+				9D6B6B9C19CBA76C00CD0CB5 /* telloTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D6B6B8719CBA76C00CD0CB5 /* tello */ = {
+			isa = PBXGroup;
+			children = (
+				9D6B6B8E19CBA76C00CD0CB5 /* AppDelegate.swift */,
+				9DD7249419CBCAF800690AFB /* TrelloUser.swift */,
+				9DD7248C19CBC89400690AFB /* TrelloHelper.swift */,
+				9D6B6B8C19CBA76C00CD0CB5 /* ViewController.swift */,
+				9D6B6B9319CBA76C00CD0CB5 /* Images.xcassets */,
+				9D6B6B9519CBA76C00CD0CB5 /* Main.storyboard */,
+				9D6B6B9019CBA76C00CD0CB5 /* tello.xcdatamodeld */,
+				9D6B6B8819CBA76C00CD0CB5 /* Supporting Files */,
+			);
+			path = tello;
+			sourceTree = "<group>";
+		};
+		9D6B6B8819CBA76C00CD0CB5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9DD7249819CC890900690AFB /* Friends */,
+				9D6B6B8919CBA76C00CD0CB5 /* Info.plist */,
+				9D6B6B8A19CBA76C00CD0CB5 /* main.swift */,
+				9D6B6BB819CBAA3300CD0CB5 /* NSColor+hex.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9D6B6B9F19CBA76C00CD0CB5 /* telloTests */ = {
+			isa = PBXGroup;
+			children = (
+				9D6B6BA219CBA76C00CD0CB5 /* telloTests.swift */,
+				9D6B6BA019CBA76C00CD0CB5 /* Supporting Files */,
+			);
+			path = telloTests;
+			sourceTree = "<group>";
+		};
+		9D6B6BA019CBA76C00CD0CB5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9D6B6BA119CBA76C00CD0CB5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DD7249819CC890900690AFB /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9DD7249919CC895600690AFB /* Alamofire.swift */,
+				9DD7249D19CC8C1000690AFB /* Async.swift */,
+				9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9D6B6B8419CBA76C00CD0CB5 /* tello */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D6B6BA619CBA76C00CD0CB5 /* Build configuration list for PBXNativeTarget "tello" */;
+			buildPhases = (
+				9D6B6B8119CBA76C00CD0CB5 /* Sources */,
+				9D6B6B8219CBA76C00CD0CB5 /* Frameworks */,
+				9D6B6B8319CBA76C00CD0CB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tello;
+			productName = tello;
+			productReference = 9D6B6B8519CBA76C00CD0CB5 /* tello.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9D6B6B9B19CBA76C00CD0CB5 /* telloTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D6B6BA919CBA76C00CD0CB5 /* Build configuration list for PBXNativeTarget "telloTests" */;
+			buildPhases = (
+				9D6B6B9819CBA76C00CD0CB5 /* Sources */,
+				9D6B6B9919CBA76C00CD0CB5 /* Frameworks */,
+				9D6B6B9A19CBA76C00CD0CB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9D6B6B9E19CBA76C00CD0CB5 /* PBXTargetDependency */,
+			);
+			name = telloTests;
+			productName = telloTests;
+			productReference = 9D6B6B9C19CBA76C00CD0CB5 /* telloTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9D6B6B7D19CBA76C00CD0CB5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = pketh;
+				TargetAttributes = {
+					9D6B6B8419CBA76C00CD0CB5 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					9D6B6B9B19CBA76C00CD0CB5 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 9D6B6B8419CBA76C00CD0CB5;
+					};
+				};
+			};
+			buildConfigurationList = 9D6B6B8019CBA76C00CD0CB5 /* Build configuration list for PBXProject "tello" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9D6B6B7C19CBA76C00CD0CB5;
+			productRefGroup = 9D6B6B8619CBA76C00CD0CB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9D6B6B8419CBA76C00CD0CB5 /* tello */,
+				9D6B6B9B19CBA76C00CD0CB5 /* telloTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9D6B6B8319CBA76C00CD0CB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D6B6B9419CBA76C00CD0CB5 /* Images.xcassets in Resources */,
+				9D6B6B9719CBA76C00CD0CB5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D6B6B9A19CBA76C00CD0CB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9D6B6B8119CBA76C00CD0CB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DD7248D19CBC89400690AFB /* TrelloHelper.swift in Sources */,
+				9D6B6B8F19CBA76C00CD0CB5 /* AppDelegate.swift in Sources */,
+				9DD7249A19CC895600690AFB /* Alamofire.swift in Sources */,
+				9D6B6B8D19CBA76C00CD0CB5 /* ViewController.swift in Sources */,
+				9D6B6B9219CBA76C00CD0CB5 /* tello.xcdatamodeld in Sources */,
+				9DD7249519CBCAF800690AFB /* TrelloUser.swift in Sources */,
+				9DD7249C19CC8A6800690AFB /* SwiftyJSON.swift in Sources */,
+				9D6B6BB919CBAA3300CD0CB5 /* NSColor+hex.swift in Sources */,
+				9DD7249E19CC8C1000690AFB /* Async.swift in Sources */,
+				9D6B6B8B19CBA76C00CD0CB5 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D6B6B9819CBA76C00CD0CB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D6B6BA319CBA76C00CD0CB5 /* telloTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9D6B6B9E19CBA76C00CD0CB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D6B6B8419CBA76C00CD0CB5 /* tello */;
+			targetProxy = 9D6B6B9D19CBA76C00CD0CB5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9D6B6B9519CBA76C00CD0CB5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9D6B6B9619CBA76C00CD0CB5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9D6B6BA419CBA76C00CD0CB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9D6B6BA519CBA76C00CD0CB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9D6B6BA719CBA76C00CD0CB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = tello/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9D6B6BA819CBA76C00CD0CB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = tello/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9D6B6BAA19CBA76C00CD0CB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = telloTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tello.app/Contents/MacOS/tello";
+			};
+			name = Debug;
+		};
+		9D6B6BAB19CBA76C00CD0CB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = telloTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tello.app/Contents/MacOS/tello";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9D6B6B8019CBA76C00CD0CB5 /* Build configuration list for PBXProject "tello" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D6B6BA419CBA76C00CD0CB5 /* Debug */,
+				9D6B6BA519CBA76C00CD0CB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D6B6BA619CBA76C00CD0CB5 /* Build configuration list for PBXNativeTarget "tello" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D6B6BA719CBA76C00CD0CB5 /* Debug */,
+				9D6B6BA819CBA76C00CD0CB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D6B6BA919CBA76C00CD0CB5 /* Build configuration list for PBXNativeTarget "telloTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D6B6BAA19CBA76C00CD0CB5 /* Debug */,
+				9D6B6BAB19CBA76C00CD0CB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9D6B6B9019CBA76C00CD0CB5 /* tello.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9D6B6B9119CBA76C00CD0CB5 /* tello.xcdatamodel */,
+			);
+			currentVersion = 9D6B6B9119CBA76C00CD0CB5 /* tello.xcdatamodel */;
+			path = tello.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9D6B6B7D19CBA76C00CD0CB5 /* Project object */;
+}
