@@ -15,11 +15,11 @@
 		9D6B6B9719CBA76C00CD0CB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6B6B9519CBA76C00CD0CB5 /* Main.storyboard */; };
 		9D6B6BA319CBA76C00CD0CB5 /* telloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6BA219CBA76C00CD0CB5 /* telloTests.swift */; };
 		9D6B6BB919CBAA3300CD0CB5 /* NSColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6BB819CBAA3300CD0CB5 /* NSColor+hex.swift */; };
-		9DD7248D19CBC89400690AFB /* TrelloHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7248C19CBC89400690AFB /* TrelloHelper.swift */; };
 		9DD7249519CBCAF800690AFB /* TrelloUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249419CBCAF800690AFB /* TrelloUser.swift */; };
 		9DD7249A19CC895600690AFB /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249919CC895600690AFB /* Alamofire.swift */; };
 		9DD7249C19CC8A6800690AFB /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */; };
 		9DD7249E19CC8C1000690AFB /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249D19CC8C1000690AFB /* Async.swift */; };
+		9DD724AC19CD228A00690AFB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD724AB19CD228A00690AFB /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,11 +45,11 @@
 		9D6B6BA119CBA76C00CD0CB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D6B6BA219CBA76C00CD0CB5 /* telloTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = telloTests.swift; sourceTree = "<group>"; };
 		9D6B6BB819CBAA3300CD0CB5 /* NSColor+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+hex.swift"; sourceTree = "<group>"; };
-		9DD7248C19CBC89400690AFB /* TrelloHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloHelper.swift; sourceTree = "<group>"; };
 		9DD7249419CBCAF800690AFB /* TrelloUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloUser.swift; sourceTree = "<group>"; };
 		9DD7249919CC895600690AFB /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9DD7249D19CC8C1000690AFB /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		9DD724AB19CD228A00690AFB /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				9D6B6B8E19CBA76C00CD0CB5 /* AppDelegate.swift */,
+				9DD724AB19CD228A00690AFB /* DataModel.swift */,
 				9DD7249419CBCAF800690AFB /* TrelloUser.swift */,
-				9DD7248C19CBC89400690AFB /* TrelloHelper.swift */,
 				9D6B6B8C19CBA76C00CD0CB5 /* ViewController.swift */,
 				9D6B6B9319CBA76C00CD0CB5 /* Images.xcassets */,
 				9D6B6B9519CBA76C00CD0CB5 /* Main.storyboard */,
@@ -240,12 +240,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DD7248D19CBC89400690AFB /* TrelloHelper.swift in Sources */,
 				9D6B6B8F19CBA76C00CD0CB5 /* AppDelegate.swift in Sources */,
 				9DD7249A19CC895600690AFB /* Alamofire.swift in Sources */,
 				9D6B6B8D19CBA76C00CD0CB5 /* ViewController.swift in Sources */,
 				9D6B6B9219CBA76C00CD0CB5 /* tello.xcdatamodeld in Sources */,
 				9DD7249519CBCAF800690AFB /* TrelloUser.swift in Sources */,
+				9DD724AC19CD228A00690AFB /* DataModel.swift in Sources */,
 				9DD7249C19CC8A6800690AFB /* SwiftyJSON.swift in Sources */,
 				9D6B6BB919CBAA3300CD0CB5 /* NSColor+hex.swift in Sources */,
 				9DD7249E19CC8C1000690AFB /* Async.swift in Sources */,
