@@ -6,6 +6,7 @@
         <attribute name="boardID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="boardName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="List" inverseName="board" inverseEntity="List" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="boards" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="CardQueue" representedClassName="tello.CardQueue" syncable="YES">
         <attribute name="boardID" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,9 +18,16 @@
         <attribute name="listName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="board" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Board" inverseName="lists" inverseEntity="Board" syncable="YES"/>
     </entity>
+    <entity name="User" representedClassName="tello.User" syncable="YES">
+        <attribute name="avatarHash" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="boards" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Board" inverseName="user" inverseEntity="Board" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Board" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="List" positionX="-54" positionY="-9" width="128" height="88"/>
-        <element name="CardQueue" positionX="-36" positionY="9" width="128" height="88"/>
+        <element name="Board" positionX="-162" positionY="99" width="128" height="133"/>
+        <element name="CardQueue" positionX="63" positionY="-36" width="128" height="88"/>
+        <element name="List" positionX="43" positionY="182" width="128" height="88"/>
+        <element name="User" positionX="-326" positionY="-18" width="128" height="103"/>
     </elements>
 </model>
