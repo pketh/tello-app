@@ -10,10 +10,8 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
-		let userToken = "b9ae1a45713ce5f55bd14d83c96825367c67a5febf6386e39c878953ef5d6563"
+		let userToken = "b9ae1a45713ce5f55bd14d83c96825367c67a5febf6386e39c878953ef5d6563" // temp
 		let trelloUser = TrelloUser(userToken: userToken)
 		println("🌺🌺🌺")
     }
@@ -54,7 +52,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             fileManager.createDirectoryAtPath(self.applicationDocumentsDirectory.path!, withIntermediateDirectories: true, attributes: nil, error: &error)
         }
         
-        // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator?
         if !shouldFail && (error == nil) {
             coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
