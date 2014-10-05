@@ -35,86 +35,136 @@ class TrelloUser {
 		Alamofire.request(.GET, trelloMember, parameters: boardParams)
 			.response {(request, response, data, error) in
 				if (error != nil) {
-					println(request)
-					self.offline(error)
+					self.handleConnectionError(error)
 				} else {
-					let json = JSONValue(data as NSData!)
+					let json = JSONValue(data as NSData!) // wrap in if let? for async time out issues?
 					println(json) // prints full json
 
-					let jsonBoards = json["boards"].array! // boardid, boardname
-					println(jsonBoards.count) // returns 6. ERR - undefined before use
-
-					self.getBoardColors(jsonBoards)
-					// println(json["boards"][0]["id"])
-					// parse out boardName
-					// --> make this a DICT to pass to self.getBoardColors
-					// parse out , avatarHash = "fb4e49d1cc52a8c4da3e6cebb600f64c"
+					let jsonBoards = json["boards"].array! // boardID, boardname
+					// println(jsonBoards.count) // returns 6
+					
+					for board in jsonBoards {
+						println("🎆")
+						// println(board)
+						let boardID = jsonBoards["id"].string!
+						let boardName = jsonBoards["name"].string! // needs to be wrapped in an if let? the json's already fetched, shouldn't need a new thread for assigment
+						self.saveBoard(boardID, boardName)
+						// + save id and name to core data						
+						self.getBoardColor(boardID)
+						self.getAvatar(json)
+						self.getLists(baordID)
+					}
 					println("🐸 Async Frog Test")
-					self.getAvatar(json)
 				}
 			}
 	}
 	
-	private func getBoardColors(jsonBoards: Array<JSONValue>) { //? needs type: Array
-		println(jsonBoards)
-		let trelloBoard = "https://api.trello.com/1/boards/" // + boardID/prefs
-		let boardParams = [
+	private func getBoardColor(boardID: String) {
+		let trelloBoard = "https://api.trello.com/1/boards/\(boardID)/prefs"
+		let colorParams = [
 			"key": trelloKey,
 			"token": token
 		]
-		for board in jsonBoards {
-			let boardID = "..."
-			println("🎆")
-			println(board)
-			// - hit the api w alamofire
-			// - parse
-		}
-
-		// test url = https://api.trello.com/1/boards/(BOARDID)/prefs?key=8240d71e24f95848cb9ca146bc84ede7&token=b9ae1a45713ce5f55bd14d83c96825367c67a5febf6386e39c878953ef5d6563
-		// let trelloBoardColorURL = "https://api.trello.com/1/boards/\(boardID)/prefs?key=\(key)&token=\(user)"
-		// has all logic/processing to store color / custom bk imag into model
+		Alamofire.request(.Get, trelloBoard, parameters: colorParams)
+			.response {(request, response, data, error) in
+				if (error != nil) {
+					self.handleConnectionError(error)
+				} else {
+					let json = JSONValue(data as NSData!) // dupe of above: wrap in _if let_? for async time out issues?
+					println(json) // prints full json
+					// -> logic and processing to store board color, bk or custom bk imag into coredata
+					// 1. determine if board color, photo/custom bk
+					// 2.0 convert board color to NSColor (yay)
+					// 2. save board color to model (either as final or placeholder): self.saveBoardColor(boardID, boardColor)
+					// 3. if photo/custom bk:
+						// 4. download the small photo
+						// 5. roughly crop it down(?), for the view controller to fit it in a circle later
+						// 6. save the bk to model : self.saveBoardBackground(boardID, boardBackground)
+						
+				}
+			}
 	}
 
 	private func getAvatar(json: JSONValue) {
-		let avatarHash = json["avatarHash"]
-		println("avatar hash is \(avatarHash)")
-		// let trelloAvatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"
-		// save the avatar img to the keychain alongside the user token and name
-		// save user as a top lvl coredata obcj w/ token in keychain
-		// - "Store everything in Core Data, except for sensitive information"
-		// does hash change when user pic changes?
+		let avatarHash = json["avatarHash"].string!
+		let avatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png" // re '30': i need something at retina thumb size?
+		Alamofire.request(.Get, avatar)
+		.response {(request, response, data, error) in
+			if (error != nil) {
+				self.handleConnectionError(error)
+			} else {
+				println("avatar fetch 🙋")
+				println(request)
+				// -> what to do now?
+				// save the avatar img to the keychain alongside the user token and name
+				// save user as a top lvl coredata obcj w/ token in keychain
+				// - "Store everything in Core Data, except for sensitive information"
+				// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this?
+			}
+		}
+
+	}
+	
+	private func getLists(boardID: String) {
+		let trelloLists = "https://api.trello.com/1/boards/\(boardID)/lists"
+		let listParams = [
+			"key": trelloKey,
+			"token": token,
+			"cards": "none",
+			"card_fields": "name",
+			"fields": "name"
+		]
+		Alamofire.request(.Get, trelloLists, parameters: listParams)
+			.response {(request, response, data, error) in
+				if (error != nil) {
+					self.handleConnectionError(error)
+				} else {
+					let json = JSONValue(data as NSData!) // dupe of above: wrap in _if let_? for async time out issues?
+					println(json) // prints full json
+					
+					// -> what to do now?
+				}
+			}
 	}
 
-	private func offline(error: NSError?) {
+
+	// MARK: Core Data Helpers
+
+	private func saveBoard(boardID: String, boardName: String) { // needs dict w boardnames/ids init
+		// boardID: String
+		// boardName: String
+		//
+		// how to deal w relationships ->
+		// lists: NSSet
+		// user: tello.User
+	}
+	
+	private func saveBoardColor(boardID: String, boardColor: String) {
+		// called from getBoardColor ..
+		// saves the raw color to the fetched board id
+	}
+	
+	private func saveBoardBackground(boardID: String, boardBackground: String) {
+		// called from getBoardColor ..
+		// saves the photo bk to the fetched board id
+	}
+
+	private func saveList() {
+		// supposed to save each list to model
+	}
+
+	private func clearSavedModels() {
+		// -> wipes board and lists model tables
+		// -> clearData() clear after the initial ui refresh and before/accompanying the first trellouser save event (only the first)
+	}
+
+
+	// MARK: Error Handling
+
+	private func handleConnectionError(error: NSError?) {
+		println(request)
 		println(error)
-	}
-
-// MARK: saves all core data objs for Board
-
-	private func saveBoardEntities() { // needs dict w boardnames/ids init
-		// starts with a for loop that creates new Board instances for each board loop
-//		boardColor: String
-//		boardCustomBackground
-//		boardID: String
-//		boardName: String
-//
-//		relationships ->
-//		lists: NSSet
-//		user: tello.User
-
-//		println("🏪 \(boards)")
-		getLists()
-	}
-
-	private func getLists() {
-	}
-
-	private func saveListEntities() {
-	}
-
-	private func clearData() {
-		// wipes board and lists model tables
-		// clearData() clear before a purposeful save and ui refresh only
+		// other types of errors? see trello api / nsurlconnection for possible error types. if many, that i want to handle differently/explicitly to make useful error msgs -> handleconnectionerrors enums func by type 
 	}
 
 }

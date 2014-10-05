@@ -12,7 +12,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
 		let userToken = "b9ae1a45713ce5f55bd14d83c96825367c67a5febf6386e39c878953ef5d6563" // temp
-		let trelloUser = TrelloUser(userToken: userToken)
+		// --> load view with previous coredata objects here
+		let trelloUser = TrelloUser(userToken: userToken) // change to newTrelloUser? refreshedTrelloUser?
 		println("🌺🌺🌺")
     }
 
