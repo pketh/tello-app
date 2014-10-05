@@ -20,6 +20,7 @@
 		9DD7249C19CC8A6800690AFB /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */; };
 		9DD7249E19CC8C1000690AFB /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7249D19CC8C1000690AFB /* Async.swift */; };
 		9DD724AC19CD228A00690AFB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD724AB19CD228A00690AFB /* DataModel.swift */; };
+		9DD9A05219E1E012007A219B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD9A04C19E1DA90007A219B /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,23 +31,23 @@
 			remoteGlobalIDString = 9D6B6B8419CBA76C00CD0CB5;
 			remoteInfo = tello;
 		};
-		9DD9A04019E1D135007A219B /* PBXContainerItemProxy */ = {
+		9DD9A04B19E1DA90007A219B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9DD9A03B19E1D135007A219B /* Alamofire.xcodeproj */;
+			containerPortal = 9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
 			remoteInfo = Alamofire;
 		};
-		9DD9A04219E1D135007A219B /* PBXContainerItemProxy */ = {
+		9DD9A04D19E1DA90007A219B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9DD9A03B19E1D135007A219B /* Alamofire.xcodeproj */;
+			containerPortal = 9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
 			remoteInfo = AlamofireTests;
 		};
-		9DD9A04419E1D147007A219B /* PBXContainerItemProxy */ = {
+		9DD9A05319E1E01B007A219B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9DD9A03B19E1D135007A219B /* Alamofire.xcodeproj */;
+			containerPortal = 9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = Alamofire;
@@ -84,7 +85,7 @@
 		9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9DD7249D19CC8C1000690AFB /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		9DD724AB19CD228A00690AFB /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		9DD9A03B19E1D135007A219B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DD9A05219E1E012007A219B /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,18 +172,18 @@
 		9DD7249819CC890900690AFB /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				9DD9A03B19E1D135007A219B /* Alamofire.xcodeproj */,
+				9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */,
 				9DD7249D19CC8C1000690AFB /* Async.swift */,
 				9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
 		};
-		9DD9A03C19E1D135007A219B /* Products */ = {
+		9DD9A04719E1DA90007A219B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9DD9A04119E1D135007A219B /* Alamofire.framework */,
-				9DD9A04319E1D135007A219B /* AlamofireTests.xctest */,
+				9DD9A04C19E1DA90007A219B /* Alamofire.framework */,
+				9DD9A04E19E1DA90007A219B /* AlamofireTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,7 +203,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				9DD9A04519E1D147007A219B /* PBXTargetDependency */,
+				9DD9A05419E1E01B007A219B /* PBXTargetDependency */,
 			);
 			name = tello;
 			productName = tello;
@@ -257,8 +259,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 9DD9A03C19E1D135007A219B /* Products */;
-					ProjectRef = 9DD9A03B19E1D135007A219B /* Alamofire.xcodeproj */;
+					ProductGroup = 9DD9A04719E1DA90007A219B /* Products */;
+					ProjectRef = 9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -270,18 +272,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9DD9A04119E1D135007A219B /* Alamofire.framework */ = {
+		9DD9A04C19E1DA90007A219B /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Alamofire.framework;
-			remoteRef = 9DD9A04019E1D135007A219B /* PBXContainerItemProxy */;
+			remoteRef = 9DD9A04B19E1DA90007A219B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9DD9A04319E1D135007A219B /* AlamofireTests.xctest */ = {
+		9DD9A04E19E1DA90007A219B /* AlamofireTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = AlamofireTests.xctest;
-			remoteRef = 9DD9A04219E1D135007A219B /* PBXContainerItemProxy */;
+			remoteRef = 9DD9A04D19E1DA90007A219B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -339,10 +341,10 @@
 			target = 9D6B6B8419CBA76C00CD0CB5 /* tello */;
 			targetProxy = 9D6B6B9D19CBA76C00CD0CB5 /* PBXContainerItemProxy */;
 		};
-		9DD9A04519E1D147007A219B /* PBXTargetDependency */ = {
+		9DD9A05419E1E01B007A219B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
-			targetProxy = 9DD9A04419E1D147007A219B /* PBXContainerItemProxy */;
+			targetProxy = 9DD9A05319E1E01B007A219B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

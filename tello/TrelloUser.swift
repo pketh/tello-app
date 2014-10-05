@@ -22,10 +22,10 @@ class TrelloUser {
 
 	init(userToken: String) {
 		token = userToken
-		self.getBoards()
+		self.GETBoards()
 	}
 
-	private func getBoards() {
+	private func GETBoards() {
 		let trelloMember = "https://api.trello.com/1/members/me"
 		let boardParams = [
 			"boards": "open",
@@ -33,17 +33,20 @@ class TrelloUser {
 			"token": token
 		]
 		Alamofire.request(.GET, trelloMember, parameters: boardParams)
-			.response {(request, response, jsonObject, error) in
+			.responseJSON {(request, response, jsonObject, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
+					println("alksjdf")
 					let json = JSON(object: jsonObject!)
 
 					// wrap in if let? for async time out issues?
 					println(json) // prints full json
 
 					let jsonBoards: Array<JSON> = json["boards"].arrayValue
-					// println(jsonBoards.count) // returns 6
+					println(jsonBoards.count) // returns 6
+					println("werwr")
+
 					
 					for board in jsonBoards {
 						println("🎆")
@@ -54,27 +57,27 @@ class TrelloUser {
 						// needs to be wrapped in an if let? the json's already fetched, shouldn't need a new thread for assigment
 						self.saveBoard(boardID, boardName: boardName)
 						// + save id and name to core data
-						self.getBoardColor(boardID)
-						self.getAvatar(json)
-						self.getLists(boardID)
+						self.GETBoardColor(boardID)
+						self.GETAvatar(json)
+						self.GETLists(boardID)
 					}
-					println("🐸 Async Frog Test")
 				}
 			}
 	}
 	
-	private func getBoardColor(boardID: String) {
+	private func GETBoardColor(boardID: String) {
 		let trelloBoard = "https://api.trello.com/1/boards/\(boardID)/prefs"
 		let colorParams: [String: AnyObject] = [
 			"key": trelloKey,
 			"token": token
 		]
-		Alamofire.request(.Get, trelloBoard, parameters: colorParams)
-			.response {(request, response, jsonObject, error) in
+		Alamofire.request(.GET, trelloBoard, parameters: colorParams)
+			.responseJSON {(request, response, jsonObject, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					let json = JSONValue(object: jsonObject)
+					println("222")
+					let json = JSON(object: jsonObject!)
 					// dupe of above: wrap in _if let_? for async time out issues?
 
 					println(json) // prints full json
@@ -91,11 +94,11 @@ class TrelloUser {
 			}
 	}
 
-	private func getAvatar(json: JSON) {
+	private func GETAvatar(json: JSON) {
 		let avatarHash = json["avatarHash"].string!
 		let avatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png" // re '30': i need something at retina thumb size?
-		Alamofire.request(.Get, avatar)
-			.response {(request, response, data, error) in
+		Alamofire.request(.GET, avatar)
+			.responseJSON {(request, response, data, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
@@ -111,7 +114,7 @@ class TrelloUser {
 
 	}
 	
-	private func getLists(boardID: String) {
+	private func GETLists(boardID: String) {
 		let trelloLists = "https://api.trello.com/1/boards/\(boardID)/lists"
 		let listParams: [String: AnyObject] = [
 			"key": trelloKey,
@@ -120,12 +123,13 @@ class TrelloUser {
 			"card_fields": "name",
 			"fields": "name"
 		]
-		Alamofire.request(.Get, trelloLists, parameters: listParams)
-			.response {(request, response, data, error) in
+		Alamofire.request(.GET, trelloLists, parameters: listParams)
+			.responseJSON {(request, response, jsonObject, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					let json = JSONValue(data as NSData!) // dupe of above: wrap in _if let_? for async time out issues?
+					let json = JSON(object: jsonObject!)
+					// dupe of above: wrap in _if let_? for async time out issues?
 					println(json) // prints full json
 					
 					// -> what to do now?
@@ -146,12 +150,12 @@ class TrelloUser {
 	}
 	
 	private func saveBoardColor(boardID: String, boardColor: String) {
-		// called from getBoardColor ..
+		// called from GETBoardColor ..
 		// saves the raw color to the fetched board id
 	}
 	
 	private func saveBoardBackground(boardID: String, boardBackground: String) {
-		// called from getBoardColor ..
+		// called from GETBoardColor ..
 		// saves the photo bk to the fetched board id
 	}
 
