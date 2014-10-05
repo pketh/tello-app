@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = NSBundle.mainBundle().URLForResource("tello", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)
+        return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 dict[NSUnderlyingErrorKey] = error
             }
             error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            NSApplication.sharedApplication().presentError(error)
+            NSApplication.sharedApplication().presentError(error!)
             return nil
         } else {
             return coordinator
@@ -99,7 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             var error: NSError? = nil
             if moc.hasChanges && !moc.save(&error) {
-                NSApplication.sharedApplication().presentError(error)
+                NSApplication.sharedApplication().presentError(error!)
             }
         }
     }
@@ -129,7 +129,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             var error: NSError? = nil
             if !moc.save(&error) {
                 // Customize this code block to include application-specific recovery steps.
-                let result = sender.presentError(error)
+                let result = sender.presentError(error!)
                 if (result) {
                     return .TerminateCancel
                 }

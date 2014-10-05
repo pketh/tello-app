@@ -33,26 +33,30 @@ class TrelloUser {
 			"token": token
 		]
 		Alamofire.request(.GET, trelloMember, parameters: boardParams)
-			.response {(request, response, data, error) in
+			.response {(request, response, jsonObject, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					let json = JSONValue(data as NSData!) // wrap in if let? for async time out issues?
+					let json = JSON(object: jsonObject!)
+
+					// wrap in if let? for async time out issues?
 					println(json) // prints full json
 
-					let jsonBoards = json["boards"].array! // boardID, boardname
+					let jsonBoards: Array<JSON> = json["boards"].arrayValue
 					// println(jsonBoards.count) // returns 6
 					
 					for board in jsonBoards {
 						println("🎆")
 						// println(board)
-						let boardID = jsonBoards["id"].string!
-						let boardName = jsonBoards["name"].string! // needs to be wrapped in an if let? the json's already fetched, shouldn't need a new thread for assigment
-						self.saveBoard(boardID, boardName)
-						// + save id and name to core data						
+						let boardID: String = board["id"].stringValue
+						let boardName: String = board["name"].stringValue
+
+						// needs to be wrapped in an if let? the json's already fetched, shouldn't need a new thread for assigment
+						self.saveBoard(boardID, boardName: boardName)
+						// + save id and name to core data
 						self.getBoardColor(boardID)
 						self.getAvatar(json)
-						self.getLists(baordID)
+						self.getLists(boardID)
 					}
 					println("🐸 Async Frog Test")
 				}
@@ -61,16 +65,18 @@ class TrelloUser {
 	
 	private func getBoardColor(boardID: String) {
 		let trelloBoard = "https://api.trello.com/1/boards/\(boardID)/prefs"
-		let colorParams = [
+		let colorParams: [String: AnyObject] = [
 			"key": trelloKey,
 			"token": token
 		]
 		Alamofire.request(.Get, trelloBoard, parameters: colorParams)
-			.response {(request, response, data, error) in
+			.response {(request, response, jsonObject, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					let json = JSONValue(data as NSData!) // dupe of above: wrap in _if let_? for async time out issues?
+					let json = JSONValue(object: jsonObject)
+					// dupe of above: wrap in _if let_? for async time out issues?
+
 					println(json) // prints full json
 					// -> logic and processing to store board color, bk or custom bk imag into coredata
 					// 1. determine if board color, photo/custom bk
@@ -85,29 +91,29 @@ class TrelloUser {
 			}
 	}
 
-	private func getAvatar(json: JSONValue) {
+	private func getAvatar(json: JSON) {
 		let avatarHash = json["avatarHash"].string!
 		let avatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png" // re '30': i need something at retina thumb size?
 		Alamofire.request(.Get, avatar)
-		.response {(request, response, data, error) in
-			if (error != nil) {
-				self.handleConnectionError(error)
-			} else {
-				println("avatar fetch 🙋")
-				println(request)
-				// -> what to do now?
-				// save the avatar img to the keychain alongside the user token and name
-				// save user as a top lvl coredata obcj w/ token in keychain
-				// - "Store everything in Core Data, except for sensitive information"
-				// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this?
-			}
+			.response {(request, response, data, error) in
+				if (error != nil) {
+					self.handleConnectionError(error)
+				} else {
+					println("avatar fetch 🙋")
+					println(request)
+					// -> what to do now?
+					// save the avatar img to the keychain alongside the user token and name
+					// save user as a top lvl coredata obcj w/ token in keychain
+					// - "Store everything in Core Data, except for sensitive information"
+					// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this?
+				}
 		}
 
 	}
 	
 	private func getLists(boardID: String) {
 		let trelloLists = "https://api.trello.com/1/boards/\(boardID)/lists"
-		let listParams = [
+		let listParams: [String: AnyObject] = [
 			"key": trelloKey,
 			"token": token,
 			"cards": "none",
@@ -162,9 +168,8 @@ class TrelloUser {
 	// MARK: Error Handling
 
 	private func handleConnectionError(error: NSError?) {
-		println(request)
 		println(error)
-		// other types of errors? see trello api / nsurlconnection for possible error types. if many, that i want to handle differently/explicitly to make useful error msgs -> handleconnectionerrors enums func by type 
+		// other types of errors? see trello api / nsurlconnection for possible error types. if many, that i want to handle differently/explicitly to make useful error msgs -> handleconnectionerrors enums func by type
 	}
 
 }
