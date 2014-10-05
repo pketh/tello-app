@@ -37,16 +37,13 @@ class TrelloUser {
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					println("alksjdf")
 					let json = JSON(object: jsonObject!)
 
 					// wrap in if let? for async time out issues?
 					println(json) // prints full json
 
 					let jsonBoards: Array<JSON> = json["boards"].arrayValue
-					println(jsonBoards.count) // returns 6
-					println("werwr")
-
+					// println(jsonBoards.count) // returns 6
 					
 					for board in jsonBoards {
 						println("🎆")
@@ -76,7 +73,6 @@ class TrelloUser {
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					println("222")
 					let json = JSON(object: jsonObject!)
 					// dupe of above: wrap in _if let_? for async time out issues?
 
