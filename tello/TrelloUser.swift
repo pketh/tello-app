@@ -11,6 +11,7 @@
 import Cocoa
 import CoreData
 import Alamofire
+import AppKit // needed for nsimage?
 
 
 class TrelloUser {
@@ -40,29 +41,24 @@ class TrelloUser {
 					let json = JSON(object: jsonObject!)
 
 					// wrap in if let? for async time out issues?
-					println(json) // prints full json
-
+					
 					let jsonBoards: Array<JSON> = json["boards"].arrayValue
 					// println(jsonBoards.count) // returns 6
 					
 					for board in jsonBoards {
-						println("🎆")
-						// println(board)
-						let boardID: String = board["id"].stringValue
-						let boardName: String = board["name"].stringValue
-
-						// needs to be wrapped in an if let? the json's already fetched, shouldn't need a new thread for assigment
+						let boardID: String = board["id"].string!
+						let boardName: String = board["name"].string!
+						let avatarHash: String = json["avatarHash"].string!
 						self.saveBoard(boardID, boardName: boardName)
-						// + save id and name to core data
-						self.GETBoardColor(boardID)
-						self.GETAvatar(json)
-						self.GETLists(boardID)
+						self.GetBoardColor(boardID)
+						self.GetAvatar(avatarHash)
+						self.GetLists(boardID)
 					}
 				}
 			}
 	}
 	
-	private func GETBoardColor(boardID: String) {
+	private func GetBoardColor(boardID: String) {
 		let trelloBoard = "https://api.trello.com/1/boards/\(boardID)/prefs"
 		let colorParams: [String: AnyObject] = [
 			"key": trelloKey,
@@ -75,8 +71,9 @@ class TrelloUser {
 				} else {
 					let json = JSON(object: jsonObject!)
 					// dupe of above: wrap in _if let_? for async time out issues?
-
-					println(json) // prints full json
+					// println(json) -> prints full json. contains height, width and full size url for board bk
+					
+					// each one returns in multiple sizes, get the url for the 140 x 100 version
 					// -> logic and processing to store board color, bk or custom bk imag into coredata
 					// 1. determine if board color, photo/custom bk
 					// 2.0 convert board color to NSColor (yay)
@@ -85,23 +82,22 @@ class TrelloUser {
 						// 4. download the small photo
 						// 5. roughly crop it down(?), for the view controller to fit it in a circle later
 						// 6. save the bk to model : self.saveBoardBackground(boardID, boardBackground)
-						
 				}
 			}
 	}
 
-	private func GETAvatar(json: JSON) {
-		let avatarHash = json["avatarHash"].string!
-		let avatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png" // re '30': i need something at retina thumb size?
+	private func GetAvatar(avatarHash: String) {
+		let avatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"
 		Alamofire.request(.GET, avatar)
-			.responseJSON {(request, response, data, error) in
+			.response {(request, response, avatarData, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					println("avatar fetch 🙋")
-					println(request)
-					// -> what to do now?
-					// save the avatar img to the keychain alongside the user token and name
+					println("🐍")
+					println(avatarData)
+					let backgroundImage = NSImage(avatarData: NSData)
+					// 🔮 avatarData needs to be converted to nsimage format (build an nsurl extension that feeds in w data from url?)
+					// -> save the avatar 'data' img to the keychain alongside the user token and name
 					// save user as a top lvl coredata obcj w/ token in keychain
 					// - "Store everything in Core Data, except for sensitive information"
 					// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this?
@@ -110,7 +106,7 @@ class TrelloUser {
 
 	}
 	
-	private func GETLists(boardID: String) {
+	private func GetLists(boardID: String) {
 		let trelloLists = "https://api.trello.com/1/boards/\(boardID)/lists"
 		let listParams: [String: AnyObject] = [
 			"key": trelloKey,
@@ -125,9 +121,6 @@ class TrelloUser {
 					self.handleConnectionError(error)
 				} else {
 					let json = JSON(object: jsonObject!)
-					// dupe of above: wrap in _if let_? for async time out issues?
-					println(json) // prints full json
-					
 					// -> what to do now?
 				}
 			}

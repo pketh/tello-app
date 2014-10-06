@@ -143,7 +143,7 @@
 		9D6B6B8819CBA76C00CD0CB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9DD7249819CC890900690AFB /* Friends */,
+				9DD7249819CC890900690AFB /* Dependencies */,
 				9D6B6B8919CBA76C00CD0CB5 /* Info.plist */,
 				9D6B6B8A19CBA76C00CD0CB5 /* main.swift */,
 				9DB42F7F19CDD29300C2FC3C /* KeychainHelper.swift */,
@@ -169,14 +169,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9DD7249819CC890900690AFB /* Friends */ = {
+		9DD7249819CC890900690AFB /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 				9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */,
 				9DD7249D19CC8C1000690AFB /* Async.swift */,
 				9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */,
 			);
-			name = Friends;
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 		9DD9A04719E1DA90007A219B /* Products */ = {
