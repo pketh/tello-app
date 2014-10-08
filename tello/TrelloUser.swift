@@ -94,8 +94,7 @@ class TrelloUser {
 					self.handleConnectionError(error)
 				} else {
 					println("🐍")
-					println(avatarData)
-					let backgroundImage = NSImage(avatarData: NSData)
+					let backgroundImage = NSImage(data: avatarData! as NSData)
 					// 🔮 avatarData needs to be converted to nsimage format (build an nsurl extension that feeds in w data from url?)
 					// -> save the avatar 'data' img to the keychain alongside the user token and name
 					// save user as a top lvl coredata obcj w/ token in keychain
