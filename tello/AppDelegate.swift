@@ -13,8 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
 		let userToken = "b9ae1a45713ce5f55bd14d83c96825367c67a5febf6386e39c878953ef5d6563" // temp
 		// --> load view with previous coredata objects here
-		// .. wrap trello user in background thread w GCD or abstraction
-		let trelloUser = TrelloUser(userToken: userToken) // change to newTrelloUser? refreshedTrelloUser?
+		Async.background {
+            let trelloUser = TrelloUser(userToken: userToken)
+        }
 		println("🌺🌺🌺")
     }
 
@@ -27,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
         let appSupportURL = urls[urls.count - 1] as NSURL
-        return appSupportURL.URLByAppendingPathComponent("com.pketh.tello")
+        return appSupportURL.URLByAppendingPathComponent("Tello")
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -57,7 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         var coordinator: NSPersistentStoreCoordinator?
         if !shouldFail && (error == nil) {
             coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-            let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("tello.storedata")
+            let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Tello.sqlite")
             if coordinator!.addPersistentStoreWithType(NSXMLStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
                 coordinator = nil
             }
@@ -156,4 +157,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
 }
-

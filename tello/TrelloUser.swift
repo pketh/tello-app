@@ -11,7 +11,6 @@
 import Cocoa
 import CoreData
 import Alamofire
-import AppKit // needed for nsimage?
 
 
 class TrelloUser {
@@ -23,10 +22,10 @@ class TrelloUser {
 
 	init(userToken: String) {
 		token = userToken
-		self.GETBoards()
+		self.GetBoards()
 	}
 
-	private func GETBoards() {
+	private func GetBoards() {
 		let trelloMember = "https://api.trello.com/1/members/me"
 		let boardParams = [
 			"boards": "open",
@@ -39,20 +38,16 @@ class TrelloUser {
 					self.handleConnectionError(error)
 				} else {
 					let json = JSON(object: jsonObject!)
-
-					// wrap in if let? for async time out issues?
-					
 					let jsonBoards: Array<JSON> = json["boards"].arrayValue
-					// println(jsonBoards.count) // returns 6
-					
 					for board in jsonBoards {
 						let boardID: String = board["id"].string!
 						let boardName: String = board["name"].string!
-						let avatarHash: String = json["avatarHash"].string!
+						let avatarHash: String = json["avatarHash"].string! // 🔮 goes 6 times -> to 1
 						self.saveBoard(boardID, boardName: boardName)
 						self.GetBoardColor(boardID)
 						self.GetAvatar(avatarHash)
 						self.GetLists(boardID)
+						
 					}
 				}
 			}
@@ -70,9 +65,7 @@ class TrelloUser {
 					self.handleConnectionError(error)
 				} else {
 					let json = JSON(object: jsonObject!)
-					// dupe of above: wrap in _if let_? for async time out issues?
 					// println(json) -> prints full json. contains height, width and full size url for board bk
-					
 					// each one returns in multiple sizes, get the url for the 140 x 100 version
 					// -> logic and processing to store board color, bk or custom bk imag into coredata
 					// 1. determine if board color, photo/custom bk
@@ -87,15 +80,17 @@ class TrelloUser {
 	}
 
 	private func GetAvatar(avatarHash: String) {
-		let avatar = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"
-		Alamofire.request(.GET, avatar)
+		let avatarPath = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"
+		let maxIterations = 1
+		var currentIteration = 0
+		
+		Alamofire.request(.GET, avatarPath)
 			.response {(request, response, avatarData, error) in
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					println("🐍")
-					let backgroundImage = NSImage(data: avatarData! as NSData)
-					// 🔮 avatarData needs to be converted to nsimage format (build an nsurl extension that feeds in w data from url?)
+					let avatar = NSImage(data: avatarData! as NSData)
+					println(avatar)
 					// -> save the avatar 'data' img to the keychain alongside the user token and name
 					// save user as a top lvl coredata obcj w/ token in keychain
 					// - "Store everything in Core Data, except for sensitive information"
@@ -128,10 +123,10 @@ class TrelloUser {
 
 	// MARK: Core Data Helpers
 
-	private func saveBoard(boardID: String, boardName: String) { // needs dict w boardnames/ids init
-		// boardID: String
-		// boardName: String
-		//
+	private func saveBoard(boardID: String, boardName: String) {
+		let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext!) as Board
+		board.boardName = boardName
+		board.boardID = boardID
 		// how to deal w relationships ->
 		// lists: NSSet
 		// user: tello.User
@@ -150,12 +145,37 @@ class TrelloUser {
 	private func saveList() {
 		// supposed to save each list to model
 	}
+	
+	// MARK: Persistent Store Handlers
+		
+	func fetchContext() { // add param for predicate / entity name. specify a func for a specific fetch type
+		// testing request:
+		// let request = NSFetchRequest(entityName: "Board")
+		// var error: NSError? = nil
+		// request.predicate = NSPredicate(format: "boardID like %@", boardID)
+		// let results: Array = managedObjectContext!.executeFetchRequest(request, error: &error)!
+		// println(results)
+		// for result in results {
+		// 	println(result.boardName)
+		// 	println(result.boardID)
+		// 	// assignment => result.x = valueX
+		// }
+	}
 
 	private func clearSavedModels() {
 		// -> wipes board and lists model tables
-		// -> clearData() clear after the initial ui refresh and before/accompanying the first trellouser save event (only the first)
+		// -> clearData() clear after the initial ui refresh and before/accompanying only the first trellouser save event
 	}
 
+	func saveContext() {
+		var error : NSError? = nil
+		if !self.managedObjectContext!.save(&error) {
+			NSLog("Unresolved error \(error), \(error!.userInfo)")
+			abort()
+		} else {
+			println("👭 Save completed")
+		}
+	}
 
 	// MARK: Error Handling
 
@@ -164,4 +184,7 @@ class TrelloUser {
 		// other types of errors? see trello api / nsurlconnection for possible error types. if many, that i want to handle differently/explicitly to make useful error msgs -> handleconnectionerrors enums func by type
 	}
 
+	deinit {
+	    	println("🙋 TrelloUser de-inited")
+    }
 }
