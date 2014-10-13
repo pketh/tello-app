@@ -39,18 +39,30 @@ class TrelloUser {
 				} else {
 					let json = JSON(object: jsonObject!)
 					let jsonBoards: Array<JSON> = json["boards"].arrayValue
+					self.GetAvatar(json)
 					for board in jsonBoards {
 						let boardID: String = board["id"].string!
-						let boardName: String = board["name"].string!
-						let avatarHash: String = json["avatarHash"].string! // 🔮 goes 6 times -> to 1
+						let boardName = board["name"].string!
 						self.saveBoard(boardID, boardName: boardName)
 						self.GetBoardColor(boardID)
-						self.GetAvatar(avatarHash)
 						self.GetLists(boardID)
-						
 					}
 				}
 			}
+	}
+	
+	private func GetAvatar(json: JSON) {
+		let avatarHash: String = json["avatarHash"].string!
+		let avatarPath = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"		
+		Alamofire.request(.GET, avatarPath)
+			.response {(request, response, avatarData, error) in
+				if (error != nil) {
+					self.handleConnectionError(error)
+				} else {
+					let avatar = NSImage(data: avatarData! as NSData)
+					self.saveAvatar(avatar!)					
+				}
+		}
 	}
 	
 	private func GetBoardColor(boardID: String) {
@@ -79,27 +91,6 @@ class TrelloUser {
 			}
 	}
 
-	private func GetAvatar(avatarHash: String) {
-		let avatarPath = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"
-		let maxIterations = 1
-		var currentIteration = 0
-		
-		Alamofire.request(.GET, avatarPath)
-			.response {(request, response, avatarData, error) in
-				if (error != nil) {
-					self.handleConnectionError(error)
-				} else {
-					let avatar = NSImage(data: avatarData! as NSData)
-					println(avatar)
-					// -> save the avatar 'data' img to the keychain alongside the user token and name
-					// save user as a top lvl coredata obcj w/ token in keychain
-					// - "Store everything in Core Data, except for sensitive information"
-					// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this?
-				}
-		}
-
-	}
-	
 	private func GetLists(boardID: String) {
 		let trelloLists = "https://api.trello.com/1/boards/\(boardID)/lists"
 		let listParams: [String: AnyObject] = [
@@ -123,6 +114,14 @@ class TrelloUser {
 
 	// MARK: Core Data Helpers
 
+	private func saveAvatar(avatar: NSImage) {
+		// println(avatar)
+		// -> save the avatar 'data' img to the keychain alongside the user token and name
+		// save user as a top lvl coredata obcj w/ token in keychain
+		// - "Store everything in Core Data, except for sensitive information"
+		// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this to reduce redundant request?
+	}
+
 	private func saveBoard(boardID: String, boardName: String) {
 		let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext!) as Board
 		board.boardName = boardName
@@ -142,7 +141,7 @@ class TrelloUser {
 		// saves the photo bk to the fetched board id
 	}
 
-	private func saveList() {
+	private func saveList(avatar: NSImage) {
 		// supposed to save each list to model
 	}
 	
