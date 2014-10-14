@@ -22,10 +22,10 @@ class TrelloUser {
 
 	init(userToken: String) {
 		token = userToken
-		self.GetBoards()
+		self.getBoards()
 	}
 
-	private func GetBoards() {
+	private func getBoards() {
 		let trelloMember = "https://api.trello.com/1/members/me"
 		let boardParams = [
 			"boards": "open",
@@ -39,19 +39,21 @@ class TrelloUser {
 				} else {
 					let json = JSON(object: jsonObject!)
 					let jsonBoards: Array<JSON> = json["boards"].arrayValue
-					self.GetAvatar(json)
+					self.getUser(json)
 					for board in jsonBoards {
 						let boardID: String = board["id"].string!
 						let boardName = board["name"].string!
 						self.saveBoard(boardID, boardName: boardName)
-						self.GetBoardColor(boardID)
-						self.GetLists(boardID)
+						self.getBoardColor(boardID)
+						self.getLists(boardID)
 					}
 				}
 			}
 	}
 	
-	private func GetAvatar(json: JSON) {
+	private func getUser(json: JSON) {
+		let username = json["username"].string!
+		let url = json["url"].string!
 		let avatarHash: String = json["avatarHash"].string!
 		let avatarPath = "https://trello-avatars.s3.amazonaws.com/\(avatarHash)/30.png"		
 		Alamofire.request(.GET, avatarPath)
@@ -59,13 +61,14 @@ class TrelloUser {
 				if (error != nil) {
 					self.handleConnectionError(error)
 				} else {
-					let avatar = NSImage(data: avatarData! as NSData)
-					self.saveAvatar(avatar!)					
+					if let avatar = NSImage(data: avatarData! as NSData) {
+						self.saveUser(username, url: url, avatar: avatar)						
+					}
 				}
 		}
 	}
 	
-	private func GetBoardColor(boardID: String) {
+	private func getBoardColor(boardID: String) {
 		let trelloBoard = "https://api.trello.com/1/boards/\(boardID)/prefs"
 		let colorParams: [String: AnyObject] = [
 			"key": trelloKey,
@@ -77,6 +80,7 @@ class TrelloUser {
 					self.handleConnectionError(error)
 				} else {
 					let json = JSON(object: jsonObject!)
+					// println(json)
 					// println(json) -> prints full json. contains height, width and full size url for board bk
 					// each one returns in multiple sizes, get the url for the 140 x 100 version
 					// -> logic and processing to store board color, bk or custom bk imag into coredata
@@ -91,7 +95,7 @@ class TrelloUser {
 			}
 	}
 
-	private func GetLists(boardID: String) {
+	private func getLists(boardID: String) {
 		let trelloLists = "https://api.trello.com/1/boards/\(boardID)/lists"
 		let listParams: [String: AnyObject] = [
 			"key": trelloKey,
@@ -111,43 +115,45 @@ class TrelloUser {
 			}
 	}
 
-
 	// MARK: Core Data Helpers
-
-	private func saveAvatar(avatar: NSImage) {
-		// println(avatar)
-		// -> save the avatar 'data' img to the keychain alongside the user token and name
-		// save user as a top lvl coredata obcj w/ token in keychain
-		// - "Store everything in Core Data, except for sensitive information"
-		// does hash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this to reduce redundant request?
+	
+	private func saveUser(username: String, url: String, avatar: NSImage) {
+		println(avatar) //
+		println(username) //
+		println(url) //
+		let userEntity = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext!) as User
+		// save nsimge to coredata?
+		
+		
 	}
 
 	private func saveBoard(boardID: String, boardName: String) {
-		let board = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext!) as Board
-		board.boardName = boardName
-		board.boardID = boardID
+		let boardEntity = NSEntityDescription.insertNewObjectForEntityForName("Board", inManagedObjectContext: managedObjectContext!) as Board
+		boardEntity.boardName = boardName
+		boardEntity.boardID = boardID
 		// how to deal w relationships ->
 		// lists: NSSet
 		// user: tello.User
 	}
 	
 	private func saveBoardColor(boardID: String, boardColor: String) {
-		// called from GETBoardColor ..
+		// called from getBoardColor ..
 		// saves the raw color to the fetched board id
 	}
 	
 	private func saveBoardBackground(boardID: String, boardBackground: String) {
-		// called from GETBoardColor ..
+		// called from getBoardColor ..
 		// saves the photo bk to the fetched board id
 	}
 
-	private func saveList(avatar: NSImage) {
+	private func saveList() {
 		// supposed to save each list to model
 	}
 	
 	// MARK: Persistent Store Handlers
 		
-	func fetchContext() { // add param for predicate / entity name. specify a func for a specific fetch type
+	func fetchContext() {
+		// add param for predicate / entity name. specify a func for a specific fetch type
 		// testing request:
 		// let request = NSFetchRequest(entityName: "Board")
 		// var error: NSError? = nil
@@ -164,6 +170,8 @@ class TrelloUser {
 	private func clearSavedModels() {
 		// -> wipes board and lists model tables
 		// -> clearData() clear after the initial ui refresh and before/accompanying only the first trellouser save event
+		// - "Store everything in Core Data, except for sensitive information"
+		// does avatarhash change when user pic changes? do i care? should this be part of the wipe as well? or should i do diffing on this to reduce redundant request?
 	}
 
 	func saveContext() {
@@ -175,6 +183,11 @@ class TrelloUser {
 			println("👭 Save completed")
 		}
 	}
+	
+	deinit {
+		// clear(), then/and save() now?
+		println("🙋 TrelloUser de-inited")
+	}
 
 	// MARK: Error Handling
 
@@ -183,7 +196,4 @@ class TrelloUser {
 		// other types of errors? see trello api / nsurlconnection for possible error types. if many, that i want to handle differently/explicitly to make useful error msgs -> handleconnectionerrors enums func by type
 	}
 
-	deinit {
-	    	println("🙋 TrelloUser de-inited")
-    }
 }

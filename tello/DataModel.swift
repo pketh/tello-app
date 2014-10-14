@@ -14,7 +14,7 @@ import CoreData
 class User: NSManagedObject {
 	@NSManaged var name: String
 	@NSManaged var url: String
-	@NSManaged var avatarHash: String
+	@NSManaged var avatarHash: String // 🔮 avatar: nsimage
 	@NSManaged var boards: NSSet
 	// password stored in keychain: http://josebolanos.wordpress.com/2012/03/16/core-data-passwords-in-keychain/
 }
