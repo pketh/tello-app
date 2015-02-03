@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3D21851A8051B9002BEB6B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3D21841A8051B9002BEB6B /* Realm.framework */; };
+		9D3D21871A8051E8002BEB6B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3D21861A8051E8002BEB6B /* libc++.dylib */; };
+		9D3D21891A8051F4002BEB6B /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D21881A8051F4002BEB6B /* RLMSupport.swift */; };
 		9D6B6B8B19CBA76C00CD0CB5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B8A19CBA76C00CD0CB5 /* main.swift */; };
 		9D6B6B8D19CBA76C00CD0CB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B8C19CBA76C00CD0CB5 /* ViewController.swift */; };
 		9D6B6B8F19CBA76C00CD0CB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6B6B8E19CBA76C00CD0CB5 /* AppDelegate.swift */; };
@@ -68,6 +71,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D3D21841A8051B9002BEB6B /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Realm.framework; sourceTree = "<group>"; };
+		9D3D21861A8051E8002BEB6B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		9D3D21881A8051F4002BEB6B /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLMSupport.swift; path = ../RLMSupport.swift; sourceTree = "<group>"; };
 		9D6B6B8519CBA76C00CD0CB5 /* tello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6B6B8919CBA76C00CD0CB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D6B6B8A19CBA76C00CD0CB5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -94,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3D21871A8051E8002BEB6B /* libc++.dylib in Frameworks */,
+				9D3D21851A8051B9002BEB6B /* Realm.framework in Frameworks */,
 				9DD9A05219E1E012007A219B /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +182,9 @@
 		9DD7249819CC890900690AFB /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				9D3D21881A8051F4002BEB6B /* RLMSupport.swift */,
+				9D3D21861A8051E8002BEB6B /* libc++.dylib */,
+				9D3D21841A8051B9002BEB6B /* Realm.framework */,
 				9DD9A04619E1DA90007A219B /* Alamofire.xcodeproj */,
 				9DD7249D19CC8C1000690AFB /* Async.swift */,
 				9DD7249B19CC8A6800690AFB /* SwiftyJSON.swift */,
@@ -320,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D6B6B8F19CBA76C00CD0CB5 /* AppDelegate.swift in Sources */,
+				9D3D21891A8051F4002BEB6B /* RLMSupport.swift in Sources */,
 				9D6B6B8D19CBA76C00CD0CB5 /* ViewController.swift in Sources */,
 				9D6B6B9219CBA76C00CD0CB5 /* tello.xcdatamodeld in Sources */,
 				9DB42F8019CDD29300C2FC3C /* KeychainHelper.swift in Sources */,
@@ -450,6 +462,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tello/tello.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = tello/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -462,6 +478,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tello/tello.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = tello/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
